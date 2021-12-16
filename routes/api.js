@@ -36,5 +36,7 @@ function myMiddlleware(req, res, next){
 
 app.post('/customer/create', CustomerController.create);
 app.post('/customer/update', CustomerController.update);
+app.post('/customer/read', CustomerController.read);
+app.post('/customer/delete', CustomerController.delete);
 
 app.listen(8000, '127.0.0.1', () => {console.log("listening on 8000")});
