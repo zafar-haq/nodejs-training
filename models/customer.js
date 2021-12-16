@@ -14,8 +14,17 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Customer.init({
-    name: DataTypes.STRING
+    name:{ 
+    type:DataTypes.STRING,
+    validate: {
+      is: /^[a-zA-Z]+$/i
+    }
+  }
   }, {
+    hooks: {
+      beforeValidate:(user, options) => {user.name=user.name.toString()},
+      afterValidate:(user, options) => {/*user.name='after validation'*/}
+  },
     sequelize,
     modelName: 'Customer',
   });

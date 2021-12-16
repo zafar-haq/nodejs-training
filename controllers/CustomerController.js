@@ -1,12 +1,18 @@
 const db = require('../models')
-
+const {ValidationError} = require('sequelize');
 
 module.exports.create = function(req, res, next){
     db.Customer.create({
-        name:'zafar'
+        name:123
     }).then( (result) => {
         res.status(201).json({message:'Customer created successfully.'})
-    } )
+    } ).catch( e => {
+        if(e instanceof ValidationError){
+            res.status(400).json({'validation error':e.errors[0].message})
+        }else{
+            res.status(400).json({error:e})
+        }
+    })
 }
 
 module.exports.update = function(req, res, next){

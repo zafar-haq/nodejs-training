@@ -34,6 +34,7 @@ function myMiddlleware(req, res, next){
     console.log('after middleware')
 }
 
+//crud
 app.post('/customer/create', CustomerController.create);
 app.post('/customer/update', CustomerController.update);
 app.post('/customer/read', CustomerController.read);
