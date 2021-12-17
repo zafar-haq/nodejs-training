@@ -34,6 +34,14 @@ function myMiddlleware(req, res, next){
     console.log('after middleware')
 }
 
+app.get('/test/:testId', function(req, res){
+    res.send(req.params.testId)
+})
+
+app.get('/test2/:testId(\\d+)', function(req, res){
+    res.send(req.params.testId)
+})
+
 //crud
 app.post('/customer/create', CustomerController.create);
 app.post('/customer/update', CustomerController.update);
