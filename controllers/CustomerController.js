@@ -1,9 +1,17 @@
 const db = require('../models')
 const {ValidationError} = require('sequelize');
+const Logger = require('../events/logger')
+
+
+const logger =  new Logger();
+logger.on('customer_updated', () => {
+    console.log('update event triggered')
+})
+
 
 module.exports.create = function(req, res, next){
     db.Customer.create({
-        name:123
+        name:'zafar'
     }).then( (result) => {
         res.status(201).json({message:'Customer created successfully.'})
     } ).catch( e => {
@@ -17,8 +25,9 @@ module.exports.create = function(req, res, next){
 
 module.exports.update = function(req, res, next){
     db.Customer.update({
-        name:'Zafar ul Haq'
+        name:'Zafar'
     }, { where: {name: 'zafar'}}).then(result => {
+        logger.customerUpdateEmit();
         res.status(200).json({message:'Customer updated successfully.'})
     })
 }
