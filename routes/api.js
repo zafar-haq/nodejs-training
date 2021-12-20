@@ -2,6 +2,7 @@ var express = require('express')
 var app = express()
 var birds = require('./birds')
 var CustomerController = require('../controllers/CustomerController')
+var OrderController = require('../controllers/OrderController')
 
 var cb0 = function (req, res, next) {
     console.log('CB0')
@@ -47,5 +48,7 @@ app.post('/customer/create', CustomerController.create);
 app.post('/customer/update', CustomerController.update);
 app.post('/customer/read', CustomerController.read);
 app.post('/customer/delete', CustomerController.delete);
+
+app.post('/order/create', OrderController.create);
 
 app.listen(8000, '127.0.0.1', () => {console.log("listening on 8000")});
